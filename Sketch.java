@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
+
   int[][] intGrid = new int[10][10];
 
   int cell_width = 20;
@@ -12,13 +13,17 @@ public class Sketch extends PApplet {
   int screen_height = 10;
   int cell_pointX = 10;
   int cell_pointY = 10;
+  int cellX;
+  int cellY;
   int countCells = 0;
+  boolean boolGreen = false;
 
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
   public void settings() {
     // put your size call here
+    size(500, 600);
     size(250, 250);
   }
 
@@ -27,6 +32,7 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
+    background(255,255,255);
     background(0, 0, 0);
   }
 
@@ -41,24 +47,68 @@ public class Sketch extends PApplet {
 
      }
     }
-    intGrid[0][0] = 1; 
+    //intGrid[9][9] = 1; 
 
-    for(int row = 0; row < intGrid.length; row++){
-      for(int column = 0; column < intGrid.length; column++){
+    for(int row = 0; row < 10; row++){
+      for(int column = 0; column < 10; column++){
         if(intGrid[column][row] == 1){
-          rect((cell_pointX + margin) * row, ((cell_pointY + margin) * column), cell_width, cell_height);
           fill(18, 252, 80);
+          rect((cell_pointX + margin) * row, ((cell_pointY + margin) * column), cell_width, cell_height);
         }
         else{
-          rect((cell_pointX + margin) * row, ((cell_pointY + margin) * column), cell_width, cell_height);
           fill(255, 255, 255);
+          rect((cell_pointX + margin) * row, ((cell_pointY + margin) * column), cell_width, cell_height);
         }
       }
     }
-	  
+
   }
 
   public void mousePressed(){
+    //if(mousePressed){
+      for(int row = 0; row < 10; row++){
+        for(int column = 0; column < 10; column++){
+ 
+         
+            if(column != 0 && mouseX < (cell_pointX + margin) * row + 20 && mouseX > (cell_pointX + margin) * row && mouseY < (cell_pointY + margin) * column + 20 && mouseY > (cell_pointY + margin) * column){
+                intGrid[column][row] = 1;
+                //System.out.println(row);
+                //System.out.println(column);
+
+              /*
+                intGrid[column - 1][row] = 1;
+                intGrid[column + 1][row] = 1;
+                intGrid[column][row - 1] = 1;
+                intGrid[column][row + 1] = 1; 
+                boolGreen = true;
+              */
+            }
+            /*
+            if(column != 0 && mouseX < (cell_pointX + margin) * row + 20 && mouseX > (cell_pointX + margin) * row && mouseY < (cell_pointY + margin) * column + 20 && mouseY > (cell_pointY + margin) * column && intGrid[column][row] == 1 && boolGreen == true){            
+              intGrid[column][row] = 0;
+              intGrid[column - 1][row] = 0;
+              intGrid[column + 1][row] = 0;
+              intGrid[column][row - 1] = 0;
+              intGrid[column][row + 1] = 0;
+              System.out.println("yyyyyyyyyyyyyyyyyyyy");
+            }
+            */
+
+            //if(intGrid[column][row] == 1){
+             // intGrid[column][row] = 0;
+            //}
+
+            else if(column == 0 && mouseX < (cell_pointX + margin) * row + 20 && mouseX > (cell_pointX + margin) * row && mouseY < (cell_pointY + margin) * column + 20 && mouseY > (cell_pointY + margin) * column){
+              intGrid[column][row] = 1;
+              intGrid[column][row + 1] = 1;
+              intGrid[column][row - 1] = 1;
+              intGrid[column + 1][row] = 1;
+            }
+
+          }
+          
+        }
+      }
+    }
     
-  }
-}
+//}
